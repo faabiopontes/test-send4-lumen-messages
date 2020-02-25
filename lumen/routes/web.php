@@ -14,3 +14,20 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'users'], function () use ($router) {
+    $router->get('/', 'UsersController@index');
+    $router->get('/{id}', 'UsersController@show');
+    $router->post('/', 'UsersController@store');
+    $router->put('/{id}', 'UsersController@update');
+    $router->delete('/{id}', 'UsersController@destroy');
+});
+
+$router->group(['prefix' => 'messages'], function () use ($router) {
+    $router->get('/', 'MessagesController@index');
+    $router->get('/{id}', 'MessagesController@show');
+    $router->get('/user/{id}', 'MessagesController@show_user_messages');
+    $router->post('/', 'MessagesController@store');
+    $router->put('/{id}', 'MessagesController@update');
+    $router->delete('/{id}', 'MessagesController@destroy');
+});
