@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  nginx:
+    container_name: nginx-lumen-messages
+    build: images/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - '3000:80'
+
+  php:
+    container_name: php-lumen-messages
+    user: root
+    build: images/php
+    volumes:
+      - ./lumen:/var/www/html
+    working_dir: /var/www/html
+    command: php-fpm
